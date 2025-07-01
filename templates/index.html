@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoDash - Modern Cryptography Suite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">🔐 CryptoDash</div>
+            <div class="logo-subtitle">Modern Cryptography Suite</div>
+        </div>
+        <nav class="nav-menu">
+            <div class="nav-item">
+                <a href="#fernet" class="nav-link active" data-cipher="fernet">
+                    <i class="fas fa-key nav-icon"></i>
+                    Fernet Encryption
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#aes" class="nav-link" data-cipher="aes">
+                    <i class="fas fa-lock nav-icon"></i>
+                    AES Encryption
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#rsa" class="nav-link" data-cipher="rsa">
+                    <i class="fas fa-shield-alt nav-icon"></i>
+                    RSA Encryption
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="header-title">Cryptography Dashboard</h1>
+            </div>
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <div class="crypto-card fernet" id="fernetCard">
+                    <div class="card-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3 class="card-title">Fernet</h3>
+                    <p class="card-description">
+                        Secure symmetric encryption with token-based security. Perfect for encrypting sensitive data with guaranteed authenticity and integrity.
+                    </p>
+                    <button class="card-button" data-cipher="fernet">
+                        <i class="fas fa-lock"></i> Use Fernet
+                    </button>
+                </div>
+
+                <div class="crypto-card aes" id="aesCard">
+                    <div class="card-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="card-title">AES</h3>
+                    <p class="card-description">
+                        Advanced Encryption Standard for secure data handling. Industry-standard symmetric encryption used worldwide for protecting sensitive information.
+                    </p>
+                    <button class="card-button" data-cipher="aes">
+                        <i class="fas fa-lock"></i> Use AES
+                    </button>
+                </div>
+
+                <div class="crypto-card rsa" id="rsaCard">
+                    <div class="card-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="card-title">RSA</h3>
+                    <p class="card-description">
+                        Asymmetric encryption for secure data transmission. Public-key cryptography that enables secure communication without sharing secret keys.
+                    </p>
+                    <button class="card-button" data-cipher="rsa">
+                        <i class="fas fa-lock"></i> Use RSA
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section">
+                <div class="results-header">
+                    <h3 class="results-title">Encryption Output</h3>
+                    <p class="results-subtitle">Your encrypted or decrypted text will appear here</p>
+                </div>
+                <div class="results-content">
+                    <div class="output-container" id="outputContainer">
+                        Welcome to CryptoDash! Select an encryption method and process your text to see results here.
+                    </div>
+                    <button class="copy-button" id="copyButton">
+                        <i class="fas fa-copy"></i>
+                        Copy to Clipboard
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="encryptModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Encrypt Text</h3>
+                <button class="close-button" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="encryptionForm">
+                    <div class="form-group">
+                        <label for="plainText" class="form-label">Input Text</label>
+                        <textarea class="form-textarea" id="plainText" placeholder="Enter your text here..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="cipherSelect" class="form-label">Cipher Algorithm</label>
+                        <select class="form-select" id="cipherSelect" required>
+                            <option value="fernet">Fernet</option>
+                            <option value="aes">AES</option>
+                            <option value="rsa">RSA</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="modeSelect" class="form-label">Operation Mode</label>
+                        <select class="form-select" id="modeSelect" required>
+                            <option value="encrypt">Encrypt</option>
+                            <option value="decrypt">Decrypt</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-button" id="submitButton">
+                        <i class="fas fa-play"></i> Process Text
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
