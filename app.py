@@ -2,8 +2,8 @@ import os
 from flask import Flask, render_template, request, jsonify
 
 # Import Fernet and AES handlers
-from fernet_handler import encrypt_fernet, decrypt_fernet
-from aes_handler import encrypt_aes, decrypt_aes
+from ciphers.fernet_handler import encrypt_fernet, decrypt_fernet
+from ciphers.aes_handler import encrypt_aes, decrypt_aes
 
 app = Flask(__name__)
 
