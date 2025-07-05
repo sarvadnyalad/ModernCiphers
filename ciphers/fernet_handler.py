@@ -1,19 +1,15 @@
-import os 
-from cryptography.fernet import Fernet # type: ignore
-from dotenv import load_dotenv # type: ignore
+from cryptography.fernet import Fernet
 
-load_dotenv()
-fernet = Fernet(os.getenv("FERNET_KEY"))    # Fernet key is mentioned in .env file
+# Static Fernet key for testing — must be 32 url-safe base64-encoded bytes
+# You can generate one using: Fernet.generate_key()
+FERNET_KEY = b'8ByKslmLEYzslU9Bkp1PTpI0cnRlz3Vt-qY5hOEP2oc='  # Replace with your secure key
 
-# Encryption of fernet cipher 
-def encrypt_fernet(plaintext: str) -> str:      
+fernet = Fernet(FERNET_KEY)
+
+# Encrypt plaintext using Fernet
+def encrypt_fernet(plaintext: str) -> str:
     return fernet.encrypt(plaintext.encode()).decode()
 
-# Decryption of fernet cipher 
+# Decrypt ciphertext using Fernet
 def decrypt_fernet(ciphertext: str) -> str:
     return fernet.decrypt(ciphertext.encode()).decode()
-
-key = os.getenv("FERNET_KEY")
-if not key:
-    raise ValueError("FERNET_KEY not found in .env file or environment variables")
-fernet = Fernet(key)
