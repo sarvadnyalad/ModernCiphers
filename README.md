@@ -60,15 +60,7 @@ A web-based cryptography tool for encrypting and decrypting text using **modern 
 git clone <repository-url>
 cd "Modern ciphers"
 
-# Create and activate a virtual environment
-python -m venv venv
-
-# Windows
-venv\Scripts\activate
-# macOS / Linux
-source venv/bin/activate
-
-# Install dependencies
+# Install required Python packages
 pip install -r requirements.txt
 ```
 
@@ -85,10 +77,28 @@ RSA_PUBLIC_KEY=keys/public.pem
 ```
 
 - **Generate a Fernet key** in Python:
-  ```python
-  from cryptography.fernet import Fernet
-  print(Fernet.generate_key().decode())
-  ```
+
+You must generate a secure 32-byte base64-encoded key for Fernet encryption. Follow these steps using the Python shell:
+
+```bash
+python
+```
+
+Then run:
+
+```python
+from cryptography.fernet import Fernet
+key = Fernet.generate_key()
+print(key.decode())
+```
+
+Copy the printed key and paste it into your `.env` file:
+
+```env
+FERNET_KEY=the-key-you-copied-here
+```
+
+✅ Make sure to restart your Flask app after setting the key.
 
 - **Generate RSA keys** using OpenSSL:
   ```bash
@@ -99,7 +109,7 @@ RSA_PUBLIC_KEY=keys/public.pem
 ### ▶️ Running the App
 
 ```bash
-flask run
+python app.py
 ```
 
 Then open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your browser.
